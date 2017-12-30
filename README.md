@@ -1,6 +1,7 @@
 # Raspberry Pi 3 Tutorial using Python
 
 ## Raspberry Pi3 Pin Layout
+```
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+  
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |  
  +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+  
@@ -27,7 +28,7 @@
  +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+  
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |  
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+  
-
+```
 ## Folder Structure
 Led    : Program to Blink the LED  
 Switch : Using switch program on RPi3  
