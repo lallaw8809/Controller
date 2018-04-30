@@ -1,5 +1,12 @@
 # Raspberry Pi 3 Tutorial using Python
 
+## Folder Structure
+Led    : Program to Blink the LED  
+Switch : Using switch program on RPi3  
+ADC    : Sample code to read the ADC values  
+LCD    : Sample code to display string on 16*2 LCD  
+UART   : Serial setup for RPi3 and code for UART  
+
 ## Raspberry Pi3 Pin Layout
 ```
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+  
@@ -29,7 +36,5 @@
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |  
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+  
 ```
-## Folder Structure
-Led    : Program to Blink the LED  
-Switch : Using switch program on RPi3  
+
 
