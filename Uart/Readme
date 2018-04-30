@@ -1,0 +1,22 @@
+Raspberry Pi Serial setup :
+---------------------------
+Step 1: Enable serial port (ttySO) using raspi-config
+	sudo raspi-config
+
+Step 2: Open the file (/boot.cmdline.txt)
+	Remove 'console=serial0,115200' from /boot/cmdline.txt
+
+Step 3: Rebbot RPi3
+
+
+Step 4: Validate the log
+	dmesg | grep tty
+
+
+Step 5: Run the uart code and validate with minicom
+        python uart.py
+
+
+Step 6: See the result in minicom
+	sudo minicom -s
+
