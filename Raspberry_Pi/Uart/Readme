@@ -11,7 +11,14 @@ Step 3: Rebbot RPi3
 
 Step 4: Validate the log
 	dmesg | grep tty
-
+	
+	For success, will get the following logs,
+	
+	[    0.000285] console [tty1] enabled
+	[    0.665714] 3f201000.serial: ttyAMA0 at MMIO 0x3f201000 (irq = 87, base_baud = 0) is a PL011 rev2
+	[    0.667178] console [ttyS0] disabled
+	[    0.667206] 3f215040.serial: ttyS0 at MMIO 0x0 (irq = 166, base_baud = 31250000) is a 16550
+	[    0.667250] console [ttyS0] enabled
 
 Step 5: Run the uart code and validate with minicom
         python uart.py
