@@ -1,6 +1,0 @@
-#Beagle Bone Black sample code and bring up procedure.
-
-##Folder Structure
-BBB_bring_up : Shows diffeerent procedure to bring up the BBB.  
-P9Pinout.PNG : Shows pin diagram and mux mode for Port 9.  
-P8Pinout.PNG : Shows pin diagram and mux mode for Port 8.  

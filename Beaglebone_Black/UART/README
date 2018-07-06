@@ -1,0 +1,74 @@
+UART bring up on BBB :
+----------------------
+
+On the BeagleBone Black, Only /dev/ttyO0 is enabled by default, and it is coupled to the serial console.
+
+To enable other ports (/dev/ttyO1,/dev/ttyO2,/dev/ttyO3,/dev/ttyO4 and /dev/ttyO),
+Please follow the following steps,
+
+Step 1 : Add the following command under /boot/uEnv.txt 
+	 optargs=quiet drm.debug=7 capemgr.enable_partno=BB-UART4
+
+Step 2 : DTS file modification
+	 Install the device tree package
+	 $ sudo apt-get install device-tree-compiler	
+
+	 Take back up of dtb file
+	 $ cd /boot/dtbs/4.14.49-ti-r54
+	 $ sudo mv am335x-boneblack.dtb am335x-boneblack.dtb_bp
+
+	 Convert the dtb to dts
+	 $ sudo dtc -I dtb -O dts -o am335x-boneblack.dts am335x-boneblack.dtb
+
+	 Enable the UART on dts file
+	 $ vi am335x-boneblack.dts
+	 Make sure that uart serial port are enabled (status=okay).
+	 serial@44e09000{ //uart1
+		status = "okay";
+	 };
+	 serial@48022000{ //uart2
+		status = "okay";
+	 };
+	 serial@48024000{ //uart3
+		status = "okay";
+	 };
+	 serial@481a6000{ //uart4
+		status = "okay";
+	 };
+	 serial@481a8000{ //uart5
+		status = "okay";
+	 };
+
+Step 3 : Enable pin mux on dts file
+	 uart1_pins: pinmux_uart1_pins {
+		pinctrl-single,pins  = <0x180 0x20 0x184 0x0>;							
+	 };
+	 serial@44e09000{ //uart1
+		status = "okay";
+		pinctrl-0 = <&uart1_pins>;
+	 };
+
+Step 4 : Compile the modified dts file and create a dtb file
+	 compile the dts file
+	 sudo dtc -I dts -O dtb -o am335x-boneblack.dtb am335x-boneblack.dts
+
+Step 5 : reboot the BBB
+	 $ ls -il /dev/ttyO*
+		crw-rw---- 1 root dialout 249, 4 Jan  1 01:18 /dev/ttyO1
+		crw-rw---- 1 root dialout 249, 4 Jan  1 01:18 /dev/ttyO2
+		crw-rw---- 1 root dialout 249, 4 Jan  1 01:18 /dev/ttyO3
+ 
+
+
+
+
+
+	
+
+
+
+	 
+
+
+ 
+
