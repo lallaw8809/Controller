@@ -1,0 +1,33 @@
+BBB Bring up on SDCard using image.
+-----------------------------------
+
+Step 1 : Download the BBB images (Desktop ot without Desktop) from following link.
+	 https://beagleboard.org/latest-images
+
+Step 2 : Extract the image.
+
+Step 3 : Flash the BBB image on sdcard.
+	 Inset the sd card and find out which port it has detected using following command,
+
+	 $ df -h
+		/dev/sdc1        62M  931K   61M   2% /media/lal/boot
+		/dev/sdc2        15G  3.1G   11G  23% /media/lal/rootfs
+
+	 In my case, the port has detected as /dev/sdc
+
+	 Flash the image using following command,
+
+	 $ sudo dd bs=1M if=bone-debian-9.4-lxqt-armhf-2018-06-17-4gb.img of=/dev/sdc
+		3400+0 records in
+		3400+0 records out
+		3565158400 bytes (3.6 GB) copied, 30.5755 s, 117 MB/s
+
+Step 4 : Safely remove the sdcard and insert into BBB and boot the BBB.
+
+
+	
+
+
+
+	 	
+

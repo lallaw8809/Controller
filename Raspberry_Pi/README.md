@@ -1,10 +1,14 @@
 # Raspberry Pi 3 Tutorial using Python
 
 ## Folder Structure
-Led    : Program to Blink the LED  
-Switch : Using switch program on RPi3  
-ADC    : Sample code to read the ADC values  
-LCD    : Sample code to display string on 16*2 LCD  
+4*4 Keypad  : Program to read the *4 krypad.  
+ADC         : Sample code to read the ADC values  
+IoT         : Program to read and update the data into URL.  
+LCD         : Sample code to display string on 16*2 LCD  
+Led         : Program to Blink the LED  
+RFID        : Program to read the RFID.  
+Switch      : Using switch program on RPi3  
+ThinkSpeak  : Program to update the sensor data into thinkspeak.  
 UART   : Serial setup for RPi3 and code for UART  
 
 ## Raspberry Pi3 Pin Layout

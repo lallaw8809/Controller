@@ -1,0 +1,75 @@
+BBB cross compile and create a bootabel sd card :
+-------------------------------------------------
+
+Required packages to install :
+------------------------------
+	$ sudo apt-get install bison flex u-boot-tools
+
+Tool Chain Setup :
+------------------
+	$ wget -c https://releases.linaro.org/components/toolchain/binaries/6.4-2017.11/arm-linux-gnueabihf/gcc-linaro-6.4.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz
+	$ tar -xvf gcc-linaro-6.4.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz 
+	$ export CC=/path/to/arm-linux-gnueabihf-
+	$ ${CC}gcc -v
+		arm-linux-gnueabihf-gcc (Linaro GCC 6.4-2017.11) 6.4.1 20171012
+		Copyright (C) 2017 Free Software Foundation, Inc.
+		This is free software; see the source for copying conditions.  There is NO
+		warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+U-boot : clone the code, cofig and cross compile
+-------------------------------------------------
+	$ git clone git://git.denx.de/u-boot.git u-boot/
+	$ cd u-boot
+	$ make ARCH=arm CROSS_COMPILE=${CC} clean
+	$ make ARCH=arm CROSS_COMPILE=${CC} distclean
+	$ make ARCH=arm CROSS_COMPILE=${CC} am335x_boneblack_defconfig
+	$ make ARCH=arm CROSS_COMPILE=${CC} 	
+		This will create a MLO and u-boot.img
+
+Kernel :  clone the code, cofig, cross compile and create images
+-----------------------------------------------------------------
+	$ git clone https://github.com/beagleboard/linux.git
+	$ cd linux
+	$ git remote -v
+	$ make ARCH=arm CROSS_COMPILE=${CC}  bb.org_defconfig
+	$ make ARCH=arm CROSS_COMPILE=${CC}  uImage dtbs LOADADDR=0x80008000 -j4
+		This will create a required images (uImage and am335x-boneblack.dtb ).
+	$ make ARCH=arm CROSS_COMPILE=${CC} modules
+
+SD Card preparation : 
+---------------------
+	Note :
+	------
+		SD card is connected with SD-Card slot
+
+	Connect the sd card slot with PC, if sd card detects as follows,
+	$ sudo fdisk -l
+		Disk /dev/sdc: 15.9 GB, 15931539456 bytes
+	$ sudo ./sd_script.sh /dev/sdc
+		This will format and create two partition as boot and RFS.
+
+	  Note : If the sd card is not formatted, run the script twice.
+		 First run  : Format teh sdcard.
+		 Second run : Create the partition.
+Root FS :
+---------
+	$ wget https://www.dropbox.com/s/k93doprl261hwn2/rootfs.tar.xz?dl=0
+	$ mv rootfs.tar.xz\?dl\=0 rootfs.tar.xz
+	$ sudo tar -xvf rootfs.tar.xz -C  /media/lal/RFS/
+	$ cd /media/lal/RFS/rootfs
+	$ sudo mv ./* ../
+	$ cd ../
+	$ sudo rmdir rootfs
+
+	Go to the Kernel directory
+	$ sudo make ARCH=arm CROSS_COMPILE=${CC} INSTALL_MOD_PATH=/media/lal/RFS/ modules_install
+	$ sudo cp arch/arm/boot/dts/am335x-boneblack.dtb /media/lal/boot/
+	$ sudo cp uEnv.txt /media/lal/boot/
+		This file is attached here, please look at the attachment.
+
+	$ sudo cp arch/arm/boot/uImage /media/lal/boot/
+
+
+Connect the sd-card on Beaglebone and restart.
+Good luck.
+
