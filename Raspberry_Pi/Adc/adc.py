@@ -18,9 +18,10 @@ import Adafruit_MCP3008
 
 
 # Software SPI configuration:
+# Use this hardware connection for RPi3
 # CLK  = 23
-# MISO = 19
-# MOSI = 21
+# MISO = 21
+# MOSI = 19
 # CS   = 24
 #mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 
